@@ -77,7 +77,7 @@ The default table output is an append-only log, so it doesn't take over your ter
 - One entry per transaction, labeled with its transaction ID and a `+inserted ~updated -deleted` count, listing each changed row with its change type. A deleted row shows its last known values.
 - Connection state changes, such as connecting, live, and stale.
 
-Every entry starts with a UTC timestamp. The server can send a complete `rows` replacement instead of incremental `changes` at any point, and then `realtime subscribe` prints the full result again. Some queries, such as ones with `ORDER BY`, can get a complete replacement for a change.
+Every entry starts with a UTC timestamp. When the server sends a complete `rows` replacement instead of incremental `changes`, the human-readable output labels it `Rows · N rows` and prints the full result again. Some queries, such as ones with `ORDER BY`, can get a complete replacement for a change.
 
 With `--changes`, it prints the raw events instead: a `rows` event with the complete current result, each row carrying a row ID, followed by `changes` events that list each change's type (`upsert` or `remove`), row ID, and row. A `rows` event replaces the full row set and invalidates earlier row IDs.
 
